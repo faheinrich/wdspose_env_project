@@ -1,4 +1,4 @@
-# wdspose_env_setup
+# wdspose_env_project
 
 run
 
