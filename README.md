@@ -4,9 +4,7 @@ run
 
 ./wdspose_env_setup.sh
 
-to download model files and
-
-to setup conda env, if neccessary install miniconda by uncommenting the first few lines.
+to download model files and setup conda env, if neccessary install miniconda by uncommenting the first few lines.
 
 Creates conda env wdspose, activate by 
 
