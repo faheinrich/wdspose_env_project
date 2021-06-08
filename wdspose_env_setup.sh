@@ -16,12 +16,12 @@ mkdir downloaded_weights
 
 
 
-
+mkdir -p ./deep-high-resolution-net.pytorch/lib/models/pytorch/pose_coco
 # download some weights
-wget -nc -O ./downloaded_weights/best_generalization_net_G.pth http://www.cs.cornell.edu/projects/megadepth/dataset/models/best_generalization_net_G.pth
-mv ./downloaded_weights/best_generalization_net_G.pth ./wdspose/best_generalization_net_G.pth
+wget -nc -O ./wdspose/best_generalization_net_G.pth http://www.cs.cornell.edu/projects/megadepth/dataset/models/best_generalization_net_G.pth
+# mv ./downloaded_weights/best_generalization_net_G.pth ./wdspose/best_generalization_net_G.pth
 
-wget -nc --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1zYC7go9EV0XaSlSBjMaiyE_4TcHc_S38' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1zYC7go9EV0XaSlSBjMaiyE_4TcHc_S38" -O ./downloaded_weights/pose_hrnet_w32_256x192.pth && rm -rf /tmp/cookies.txt
+wget -nc --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1zYC7go9EV0XaSlSBjMaiyE_4TcHc_S38' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1zYC7go9EV0XaSlSBjMaiyE_4TcHc_S38" -O ././deep-high-resolution-net.pytorch/lib/models/pytorch/pose_coco/pose_hrnet_w32_256x192.pth && rm -rf /tmp/cookies.txt
 
 wget -nc --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1azqyC3mnryVMm9rbHFcAlk9ERBl13aOR' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1azqyC3mnryVMm9rbHFcAlk9ERBl13aOR" -O ./downloaded_weights/model_data.zip && rm -rf /tmp/cookies.txt
 unzip -o ./downloaded_weights/model_data.zip -d ./wdspose
@@ -45,7 +45,7 @@ conda install -y pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch
 conda install -y -c conda-forge opencv
 # conda install -y -c confa-forge ros-noetic-desktop
 
-pip install numpy pyyaml==3.12 matplotlib setuptools Cython mock scipy six future protobuf json_tricks yacs pycocotools pathlib pathlib2
+python2.7 -m pip install numpy pyyaml==3.12 matplotlib setuptools Cython mock scipy six future protobuf json_tricks yacs pycocotools pathlib pathlib2
 
 
 # geht ueber pip:
@@ -58,8 +58,8 @@ pip install numpy pyyaml==3.12 matplotlib setuptools Cython mock scipy six futur
 # cd Detectron && make
 # cd ..
 
-mkdir -p ./deep-high-resolution-net.pytorch/lib/models/pytorch/pose_coco
-mv ./downloaded_weights/pose_hrnet_w32_256x192.pth ./deep-high-resolution-net.pytorch/lib/models/pytorch/pose_coco/pose_hrnet_w32_256x192.pth
+
+# mv ./downloaded_weights/pose_hrnet_w32_256x192.pth ./deep-high-resolution-net.pytorch/lib/models/pytorch/pose_coco/pose_hrnet_w32_256x192.pth
 
 # cp ~/3dpose_setup/wdspose_custom_files/megadepth.py ~/wdspose_env/wdspose/scripts/megadepth.py
 # cp ~/3dpose_setup/wdspose_custom_files/maskrcnn.py ~/wdspose_env/wdspose/scripts/maskrcnn.py
@@ -75,4 +75,4 @@ mv ./downloaded_weights/pose_hrnet_w32_256x192.pth ./deep-high-resolution-net.py
 
 
 # cd ~/wdspose_env/wdspose
-# python wdspose_script.py
+# python2.7 wdspose_script.py
