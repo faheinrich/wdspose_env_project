@@ -79,7 +79,6 @@ def main():
         wdspose_config, wdspose_model = scripts.predict.setup_model()
 
         # test_loader, test_set, wdspose_transforms = scripts.predict.setup_data(wdspose_config, img_folder, metadata, keypoints, depth_folder)
-        test_loader, test_set, wdspose_transforms = scripts.predict.setup_data(wdspose_config, img_folder, metadata, keypoints, depth_folder)
 
 
 
@@ -89,7 +88,7 @@ def main():
         print("start")
         for i in range(10000):
             # time.sleep(5)
-            ges_time = time.time()
+            # ges_time = time.time()
 
 
             # cam_time = time.time()
@@ -99,13 +98,13 @@ def main():
                 print("webcam failed")
                 exit()
           
-            # cv2.imwrite("workspace/input_imgs/test.jpg", frame)
+            cv2.imwrite("workspace/input_imgs/test.jpg", frame)
             # cv2.imwrite("workspace/input_imgs/test.jpg", frame)
             # cap.release()
             # print("cam time:", time.time() - cam_time)
 
 
-            # depthtime = time.time()
+            depthtime = time.time()
             # print("depth")
             # calculate depth image
             
@@ -120,12 +119,12 @@ def main():
             depth_image = scripts.megadepth.predict_depth(img, depth_model, batch_size=1)
             # np.save(os.path.join("workspace/depth", '%s.npy' % img_f.split("/")[-1]), depth_image)
             # scripts.megadepth.predict(depth_model, img_folder, depth_folder)
-            # print("depth_time", time.time() - depthtime)
+            print("depth_time", time.time() - depthtime)
             
             #torch.cuda.empty_cache()
 
     
-            # boxtime = time.time()
+            boxtime = time.time()
             # print("bboxes")
             # calculate bounding boxes
             
@@ -135,13 +134,13 @@ def main():
             
             # save(os.path.join("workspace/bboxes", "%s.pkl" % img_f.split("/")[-1]), cls_boxes[1])
                 # torch.cuda.empty_cache()
-            # print("box_time", time.time() - boxtime)
+            print("box_time", time.time() - boxtime)
             # scripts.maskrcnn.predict(maskrcnn_model, img_folder, bboxes)
             
           
 
             #torch.cuda.empty_cache()
-            # hrnettime = time.time()
+            hrnettime = time.time()
             # print("hrnet")
      
 
@@ -152,27 +151,28 @@ def main():
             # exit()
             # scripts.hrnet.predict_imgs(hrnet_model, img_folder, bboxes, keypoints, hrnet_normalize, hrnet_dataset, hrnet_loader)
             # keypoints = scripts.hrnet.predict_imgs(hrnet_model, hrnet_args.imgs, hrnet_args.bbox , hrnet_args.out, hrnet_normalize, hrnet_dataset, hrnet_loader)
-            # print("2dpose", time.time() - hrnettime)
+            print("2dpose", time.time() - hrnettime)
             
             
             
-            # wdsposetime = time.time()
+            wdsposetime = time.time()
             # print("start wdspose")
          
-            #torch.cuda.empty_cache()
+            torch.cuda.empty_cache()
 
-            scripts.predict.predict_single_image(wdspose_model, frame, keypoints, depth_image, wdspose_transforms, "workspace/results.pkl", camera_params)
+            # scripts.predict.predict_single_image(wdspose_model, frame, keypoints, depth_image, wdspose_transforms, "workspace/results.pkl", camera_params)
 
             # exit()
-            # test_loader, test_set, wdspose_transforms = scripts.predict.setup_data(wdspose_config, img_folder, metadata, keypoints, depth_folder)
-            # scripts.predict.do_your_thing(wdspose_model, test_loader, test_set, wdspose_transforms, img_folder, "workspace/results.pkl")
-            # print("wdspose", time.time() - wdsposetime)
+            test_loader, test_set, wdspose_transforms = scripts.predict.setup_data(wdspose_config, img_folder, metadata, keypoints, depth_folder)
+            scripts.predict.do_your_thing(wdspose_model, test_loader, test_set, wdspose_transforms, img_folder, "workspace/results.pkl")
+            print("wdspose", time.time() - wdsposetime)
 
             # exit()
             # torch.cuda.empty_cache()
             
-            print("gesamt:", time.time() - ges_time, "freq:", 1/(time.time() - ges_time))
+            # print("gesamt:", time.time() - ges_time, "freq:", 1/(time.time() - ges_time))
             # exit()
+            print("++++++++++++")
 
 if __name__ == "__main__":
     main()

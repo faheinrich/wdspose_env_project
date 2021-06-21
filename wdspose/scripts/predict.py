@@ -95,9 +95,9 @@ class ImageFolderDataset:
 
         if self.transform:
             sample = self.transform(sample)
-        print(sample)
-        print(sample.shape)
-        print("+++++++++++++++++++++++++")
+        # print(sample)
+        # print(sample.shape)
+        # print("+++++++++++++++++++++++++")
 
         return sample
 
@@ -242,11 +242,11 @@ def do_your_thing(model, test_loader, test_set, transforms, img_folder, out_path
     save(out_path, result)
 
     for img in test_set.images:
-        print(img)
+        # print(img)
         # image = test_set.images[0]
         image_path = os.path.join(img_folder, img)
-        print(image_path)
-        show_result(image_path, result[img])
+        image = cv2.imread(image_path)
+        show_result(image, result[img])
 
 def main(model, test_loader, transforms, img_folder, metadata, poses_path, depth_folder, out_path, visualize):
     # config, model = load_model('unnormalized')
